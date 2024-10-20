@@ -1,1 +1,1 @@
-# mms
+# EMS - email management system
