@@ -2,7 +2,8 @@ import './App.css';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import { Suspense } from 'react';
-
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/app-sidebar';
 // MAPPER
 const routes = [];
 
@@ -29,15 +30,20 @@ function App() {
   // TODO SIDE BAR
   return (
     <BrowserRouter>
-      <div>
-        <ToastContainer />
-        <Suspense fallback={<h6>Loading...</h6>}>
-          <Routes>
-            {routes}
-            <Route path='*' element={<h6>Không có đường dẫn...</h6>} />
-          </Routes>
-        </Suspense>
-      </div>
+      <SidebarProvider>
+        <AppSidebar />
+        <div>
+          <ToastContainer />
+          <SidebarTrigger />
+          <Suspense fallback={<h6>Loading...</h6>}>
+            <Routes>
+              {routes}
+              <Route path='*' element={<h6>Không có đường dẫn...</h6>} />
+            </Routes>
+          </Suspense>
+        </div>
+      </SidebarProvider>
+
     </BrowserRouter>
 
   );

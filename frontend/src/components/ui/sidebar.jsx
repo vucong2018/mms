@@ -29,7 +29,7 @@ const SidebarContext = React.createContext(null);
 function useSidebar() {
   const context = React.useContext(SidebarContext);
   if (!context) {
-    throw new Error('useSidebar must be used within a Sidebar.');
+    throw new Error('useSidebar must be used within a SidebarProvider.');
   }
 
   return context;
@@ -114,7 +114,7 @@ const SidebarProvider = React.forwardRef((
             }
           }
           className={cn(
-            'group/sidebar-wrapper flex min-h-svh w-full text-sidebar-foreground has-[[data-variant=inset]]:bg-sidebar',
+            'group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
             className
           )}
           ref={ref}
@@ -176,7 +176,7 @@ const Sidebar = React.forwardRef((
   return (
     (<div
       ref={ref}
-      className='group peer hidden md:block'
+      className='group peer hidden md:block text-sidebar-foreground'
       data-state={state}
       data-collapsible={state === 'collapsed' ? collapsible : ''}
       data-variant={variant}

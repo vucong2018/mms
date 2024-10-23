@@ -4,4 +4,4 @@ export default {
     routes: {
         '/user/role': lazy(() => import('./adminPage'))
     }
-};
+}; 
