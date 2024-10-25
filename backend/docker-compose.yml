@@ -1,0 +1,52 @@
+services:
+  # Node.js Backend
+  backend:
+    image: node:18
+    container_name: backend
+    working_dir: /usr/src/app/backend
+    volumes:
+      - .:/usr/src/app/backend
+      - /usr/src/app/backend/node_modules
+    env_file:
+      - .env
+    command: sh -c "npm install && npm run start"
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - redis
+      - rabbitmq
+      - postgres
+
+  # Redis
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+
+  # Postgres
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DATABASE}
+    ports:
+      - "${PG_PORT}:${PG_PORT}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
