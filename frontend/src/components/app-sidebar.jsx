@@ -1,5 +1,5 @@
 import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
-
+import { Link } from 'react-router-dom';
 import {
     Sidebar,
     SidebarContent,
@@ -10,17 +10,17 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-
+// TODO GET API AND SAVE
 // Menu items.
 const items = [
     {
         title: 'Home',
-        url: '#',
+        url: '/',
         icon: Home,
     },
     {
         title: 'Inbox',
-        url: '#',
+        url: '/user/role',
         icon: Inbox,
     },
     {
@@ -39,22 +39,23 @@ const items = [
         icon: Settings,
     },
 ];
-
+// TODO HANDLE ITEMS
 export function AppSidebar() {
     return (
-        <Sidebar>
+        <Sidebar collapsible='icon'>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
+
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link to={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}

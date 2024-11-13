@@ -2,8 +2,9 @@ import './App.css';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import { Suspense } from 'react';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
+import { AppHeader } from './components/app-header';
 // MAPPER
 const routes = [];
 
@@ -32,18 +33,19 @@ function App() {
     <BrowserRouter>
       <SidebarProvider>
         <AppSidebar />
-        <div>
-          <ToastContainer />
-          <SidebarTrigger />
-          <Suspense fallback={<h6>Loading...</h6>}>
-            <Routes>
-              {routes}
-              <Route path='*' element={<h6>Không có đường dẫn...</h6>} />
-            </Routes>
-          </Suspense>
+        <div className='h-full w-full'>
+          <AppHeader />
+          <div className='p-4'>
+            <Suspense fallback={<h6>Loading...</h6>}>
+              <Routes>
+                {routes}
+                <Route path='*' element={<h6>Không có đường dẫn...</h6>} />
+              </Routes>
+            </Suspense>
+          </div>
         </div>
       </SidebarProvider>
-
+      <ToastContainer />
     </BrowserRouter>
 
   );

@@ -6,6 +6,8 @@ import { store } from './redux/store.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <App />
+    <div className='w-screen h-screen bg-white'>
+      <App />
+    </div>
   </Provider>
 );
