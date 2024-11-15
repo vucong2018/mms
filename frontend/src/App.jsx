@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import { AppHeader } from './components/app-header';
+import T from './utils/comon';
 // MAPPER
 const routes = [];
 
@@ -29,6 +30,7 @@ for (const key in modules) {
 
 function App() {
   // TODO SIDE BAR
+  window.T = T;
   return (
     <BrowserRouter>
       <SidebarProvider>
